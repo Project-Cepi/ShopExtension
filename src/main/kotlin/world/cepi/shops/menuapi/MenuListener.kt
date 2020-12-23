@@ -15,7 +15,9 @@ class MenuListener {
     fun register(playerInit: Player) {
         MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
             with(event) {
-                m
+                if (map.containsKey(event.inventory)) {
+                    map[event.inventory]?.get(event.slot).accept(event.clickType)
+                }
             }
         }
     }
