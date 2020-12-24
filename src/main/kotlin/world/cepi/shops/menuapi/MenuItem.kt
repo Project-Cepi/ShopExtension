@@ -6,8 +6,8 @@ import net.minestom.server.item.ItemStack
 /** Represents an item in a menu -- interactable. */
 class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
 
-    /** The internal clicker object, which allows for multiple click events on one MenuItem. */
-    val clickers: MutableList<(ClickType) -> Unit> = mutableListOf()
+    /** The internal clicker object */
+    var clicker: MenuClicker? = null
 
     /**
      * Register a lambda to run when an item is clicked
@@ -16,7 +16,7 @@ class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
      * @param toCancel Whether to stop the player from picking up the item at this time
      */
     fun onClick(consumer: (ClickType) -> Unit, toCancel: Boolean = true) {
-        clickers.add(consumer)
+        clicker = MenuClicker(consumer, toCancel)
         items.add(this)
     }
 
@@ -26,7 +26,7 @@ class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
      * @param consumer The consumer to use, takes in a ClickType
      */
     fun onClick(consumer: (ClickType) -> Unit) {
-        clickers.add(consumer)
+        clicker = MenuClicker(consumer)
         items.add(this)
     }
 

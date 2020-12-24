@@ -9,9 +9,9 @@ object MenuListener {
         MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
             val item = MenuItem.items.firstOrNull { it.slot == event.slot && it.menu.inventory.isViewer(event.player) }
 
-            if (item != null) {
-                item.clickers.forEach { it.invoke(event.clickType) }
-                event.isCancelled = true
+            item?.clicker?.let {
+                it.consumer.invoke(event.clickType)
+                event.isCancelled = it.toCancel
             }
         }
     }

@@ -8,10 +8,10 @@ import net.minestom.server.item.ItemStack
 /** Wrapper class for Inventory. Holds MenuItems. */
 class Menu(
     /** The name of the Menu -- displays to the player*/
-    val name: String,
+    name: String,
 
     /** The type of the Menu, barrel, chest with rows, etc. */
-    val type: InventoryType
+    type: InventoryType
 ) {
 
     /** The internal inventory object of the Menu */
