@@ -9,7 +9,7 @@ class ShopExtension : Extension() {
 
     override fun initialize() {
         MinecraftServer.getCommandManager().register(TestCmd())
-        MenuListener().register()
+        MenuListener.register()
         logger.info("[ExampleExtension] has been enabled!")
     }
 

@@ -13,6 +13,11 @@ class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
         items.add(this)
     }
 
+    fun onClick(consumer: (ClickType) -> Unit) {
+        clickers.add(consumer)
+        items.add(this)
+    }
+
     companion object {
         val items: MutableList<MenuItem> = mutableListOf()
     }

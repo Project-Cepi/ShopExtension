@@ -2,10 +2,8 @@ package world.cepi.shops.menuapi
 
 import net.minestom.server.MinecraftServer
 import net.minestom.server.event.inventory.InventoryPreClickEvent
-import net.minestom.server.inventory.click.ClickType
 
-class MenuListener {
-
+object MenuListener {
 
     fun register() {
         MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
@@ -17,4 +15,5 @@ class MenuListener {
             }
         }
     }
+
 }
