@@ -7,7 +7,7 @@ import net.minestom.server.item.ItemStack
 class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
 
     /** The internal clicker object */
-    var clicker: MenuClicker? = null
+    var clicker: MenuClicker = MenuClicker()
 
     /**
      * Register a lambda to run when an item is clicked
