@@ -1,11 +1,8 @@
 package world.cepi.shops.menuapi
 
-import net.minestom.server.entity.Player
 import net.minestom.server.inventory.Inventory
 import net.minestom.server.inventory.InventoryType
-import net.minestom.server.inventory.click.ClickType
 import net.minestom.server.item.ItemStack
-import java.util.function.Consumer
 
 class Menu(val name: String, val size: InventoryType) {
     val inventory = Inventory(size, name)
