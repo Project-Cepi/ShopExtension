@@ -1,23 +1,20 @@
 package world.cepi.shops.menuapi
 
 import net.minestom.server.MinecraftServer
-import net.minestom.server.entity.Player
-import net.minestom.server.event.inventory.InventoryClickEvent
 import net.minestom.server.event.inventory.InventoryPreClickEvent
-import net.minestom.server.inventory.Inventory
 import net.minestom.server.inventory.click.ClickType
-import java.util.function.Consumer
 
 class MenuListener {
 
-    val map = hashMapOf<Inventory, HashMap<Int, Consumer<ClickType>>>()
+    val map = hashMapOf<MenuItem, (ClickType) -> Unit>()
 
-    fun register(playerInit: Player) {
+    fun register() {
         MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
-            with(event) {
-                if (map.containsKey(event.inventory)) {
-                    map[event.inventory]?.get(event.slot).accept(event.clickType)
-                }
+            val item = map.entries.firstOrNull { it.key.slot == event.slot && it.key.menu.inventory.isViewer(event.player) }
+
+            if (item != null) {
+                item.value.invoke(event.clickType)
+                event.isCancelled = true
             }
         }
     }

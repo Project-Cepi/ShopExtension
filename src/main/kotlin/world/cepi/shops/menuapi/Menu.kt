@@ -9,13 +9,10 @@ import java.util.function.Consumer
 
 class Menu(val name: String, val size: InventoryType) {
     val inventory = Inventory(size, name)
-    init {
-        MenuListener().map[inventory] = HashMap<Int, Consumer<ClickType>>()
-    }
 
-    fun setItem(slot: Int, item: ItemStack) : MenuItem{
+    fun setItem(slot: Int, item: ItemStack) : MenuItem {
         this.inventory.setItemStack(slot, item)
-        return MenuItem(slot, item, this.inventory)
+        return MenuItem(slot, item, this)
     }
 
     fun toInventory() : Inventory {

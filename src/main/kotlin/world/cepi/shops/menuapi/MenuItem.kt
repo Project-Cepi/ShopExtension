@@ -5,9 +5,8 @@ import net.minestom.server.inventory.click.ClickType
 import net.minestom.server.item.ItemStack
 import java.util.function.Consumer
 
-class MenuItem(val slot: Int, val item: ItemStack, val inv: Inventory) {
-    fun onClick(consumer: Consumer<ClickType>, boolean: Boolean) {
-        MenuListener().map[inv]?.set(slot, consumer)
-        consumer.invoke
+class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
+    fun onClick(consumer: (ClickType) -> Unit, boolean: Boolean = true) {
+        MenuListener().map[this] = consumer
     }
 }

@@ -10,9 +10,7 @@ class ShopExtension : Extension() {
     override fun initialize() {
         logger.info("[ExampleExtension] has been enabled!")
         MinecraftServer.getCommandManager().register(TestCmd())
-        MinecraftServer.getConnectionManager().addPlayerInitialization {
-            MenuListener().register(it)
-        }
+        MenuListener().register()
     }
 
     override fun terminate() {
