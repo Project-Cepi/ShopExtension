@@ -4,8 +4,8 @@ import net.minestom.server.inventory.Inventory
 import net.minestom.server.inventory.InventoryType
 import net.minestom.server.item.ItemStack
 
-class Menu(val name: String, val size: InventoryType) {
-    val inventory = Inventory(size, name)
+class Menu(val name: String, val type: InventoryType) {
+    val inventory = Inventory(type, name)
 
     fun setItem(slot: Int, item: ItemStack) : MenuItem {
         this.inventory.setItemStack(slot, item)

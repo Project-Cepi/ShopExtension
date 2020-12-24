@@ -8,9 +8,9 @@ import world.cepi.shops.menuapi.TestCmd
 class ShopExtension : Extension() {
 
     override fun initialize() {
-        logger.info("[ExampleExtension] has been enabled!")
         MinecraftServer.getCommandManager().register(TestCmd())
         MenuListener().register()
+        logger.info("[ExampleExtension] has been enabled!")
     }
 
     override fun terminate() {
