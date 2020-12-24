@@ -9,11 +9,6 @@ class MenuListener {
 
     fun register() {
         MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
-            MenuItem.items.forEach {
-                println("e" + (it.slot == event.slot))
-                println("d" + it.menu.inventory.isViewer(event.player))
-            }
-
             val item = MenuItem.items.firstOrNull { it.slot == event.slot && it.menu.inventory.isViewer(event.player) }
 
             if (item != null) {
