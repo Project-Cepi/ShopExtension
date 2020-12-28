@@ -7,7 +7,6 @@ import net.minestom.server.inventory.InventoryType
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.shops.menuapi.menu
-import world.cepi.shops.menuapi.openMenu
 
 class TestCmd : Command("menu") {
     init {
