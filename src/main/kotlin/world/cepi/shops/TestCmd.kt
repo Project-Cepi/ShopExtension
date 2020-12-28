@@ -6,18 +6,19 @@ import net.minestom.server.entity.Player
 import net.minestom.server.inventory.InventoryType
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
-import world.cepi.shops.menuapi.Menu
+import world.cepi.shops.menuapi.menu
 import world.cepi.shops.menuapi.openMenu
 
 class TestCmd : Command("menu") {
     init {
         setDefaultExecutor { sender: CommandSender, _ ->
             val player = sender as Player
-            val menu = Menu("Test", InventoryType.CHEST_1_ROW)
-            val item = ItemStack(Material.ACACIA_BOAT, 1)
-            menu.setItem(3, item).onClick {
-                player.sendMessage("test")
+
+            val menu = menu("Test", InventoryType.CHEST_1_ROW) {
+                set(3, Material.ACACIA_BOAT)
+                        .onClick { player.sendMessage("test") }
             }
+
             player.openMenu(menu)
         }
     }

@@ -4,7 +4,7 @@ import net.minestom.server.inventory.click.ClickType
 import net.minestom.server.item.ItemStack
 
 /** Represents an item in a menu -- interactable. */
-class MenuItem(val slot: Int, val item: ItemStack, val menu: Menu) {
+class MenuItem(val slot: Int = 0, val item: ItemStack, val menu: Menu) {
 
     /** The internal clicker object */
     var clicker: MenuClicker = MenuClicker()
