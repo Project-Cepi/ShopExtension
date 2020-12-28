@@ -37,14 +37,22 @@ class Menu(
      * Sets an item at a position in the [Menu].
      *
      * @param slot The slot to set the item at
-     * @param material The material to set at the slot
+     * @param item The item to put in that slot
      * @param onClick Lambda that triggers the user clicks on the MenuItem.
      *
      * @return A MenuItem which is intractable.
      */
-    fun set(slot: Int, material: Material, onClick: (ClickType) -> Unit = { }) : MenuItem {
-        this.inventory.setItemStack(slot, ItemStack(material, 1))
-        return MenuItem(slot, ItemStack(material, 1), this).onClick(consumer = onClick)
+    fun set(slots: IntRange, item: ItemStack, onClick: (ClickType) -> Unit = { }) : MenuItems {
+
+        val items = MenuItems()
+
+        slots.forEach {
+            this.inventory.setItemStack(it, item)
+            items.add(MenuItem(it, item, this).onClick(consumer = onClick))
+        }
+
+        return items
+
     }
 
     fun open(vararg players: Player) {
