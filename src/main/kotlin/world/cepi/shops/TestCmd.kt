@@ -15,8 +15,7 @@ class TestCmd : Command("menu") {
             val player = sender as Player
 
             val menu = menu("Test", InventoryType.CHEST_1_ROW) {
-                set(3, Material.ACACIA_BOAT)
-                        .onClick { player.sendMessage("test") }
+                set(3, Material.ACACIA_BOAT) { player.sendMessage("test") }
             }
 
             player.openMenu(menu)

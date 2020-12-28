@@ -15,9 +15,10 @@ class MenuItem(val slot: Int = 0, val item: ItemStack, val menu: Menu) {
      * @param consumer The consumer to use, takes in a ClickType
      * @param toCancel Whether to stop the player from picking up the item at this time
      */
-    fun onClick(toCancel: Boolean = true, consumer: (ClickType) -> Unit) {
+    fun onClick(toCancel: Boolean = true, consumer: (ClickType) -> Unit): MenuItem {
         clicker = MenuClicker(consumer, toCancel)
         items.add(this)
+        return this
     }
 
     companion object {
