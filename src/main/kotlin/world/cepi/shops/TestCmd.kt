@@ -14,11 +14,9 @@ class TestCmd : Command("menu") {
         setDefaultExecutor { sender: CommandSender, _ ->
             val player = sender as Player
 
-            val menu = menu("Test", InventoryType.CHEST_1_ROW) {
+            menu("Test", InventoryType.CHEST_1_ROW) {
                 set(3, Material.ACACIA_BOAT) { player.sendMessage("test") }
-            }
-
-            player.openMenu(menu)
+            }.open(player)
         }
     }
 }

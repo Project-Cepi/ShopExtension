@@ -46,6 +46,10 @@ class Menu(
         this.inventory.setItemStack(slot, ItemStack(material, 1))
         return MenuItem(slot, ItemStack(material, 1), this).onClick(consumer = onClick)
     }
+
+    fun open(vararg players: Player) {
+        players.forEach { it.openMenu(this) }
+    }
 }
 
 /**
@@ -56,11 +60,11 @@ class Menu(
  *
  * @return A [Menu] object
  */
-fun menu(name: String = "Chest", type: InventoryType = InventoryType.CHEST_3_ROW, init: Menu.() -> Unit = { }): Menu {
-    val shape = Menu(name, type)
-    shape.init()
+inline fun menu(name: String = "Chest", type: InventoryType = InventoryType.CHEST_3_ROW, init: Menu.() -> Unit = { }): Menu {
+    val menu = Menu(name, type)
+    menu.init()
 
-    return shape
+    return menu
 }
 
 fun Player.openMenu(menu: Menu) = this.openInventory(menu.inventory)
