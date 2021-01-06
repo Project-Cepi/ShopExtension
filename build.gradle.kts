@@ -36,6 +36,9 @@ dependencies {
     // Get KStom
     implementation("com.github.Project-Cepi:KStom:aace4fedfe")
 
+    // Get ItemExtension
+    implementation("com.github.Project-Cepi:ItemExtension:8f515036bd")
+
     // OkHttp
     implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
 

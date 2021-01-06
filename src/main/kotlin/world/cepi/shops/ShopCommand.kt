@@ -1,11 +1,12 @@
 package world.cepi.shops
 
 import net.minestom.server.command.builder.Command
-import net.minestom.server.command.builder.arguments.Argument
 import net.minestom.server.command.builder.arguments.ArgumentType
+import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
 
 class ShopCommand: Command("shop") {
+
 
     init {
         val create = "create".asSubcommand()
@@ -18,7 +19,10 @@ class ShopCommand: Command("shop") {
         val remove = "remove".asSubcommand()
         val delete = "delete".asSubcommand()
 
-        
+        addSyntax(create, shopName) { ->
+
+        }
+
     }
 
 }
