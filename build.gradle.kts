@@ -33,6 +33,9 @@ dependencies {
     // Compile Minestom into project
     implementation("com.github.Minestom:Minestom:ca3667732f")
 
+    // Get KStom
+    implementation("com.github.Project-Cepi:KStom:aace4fedfe")
+
     // OkHttp
     implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
 

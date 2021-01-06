@@ -7,8 +7,8 @@ import world.cepi.shops.menuapi.MenuListener
 class ShopExtension : Extension() {
 
     override fun initialize() {
-        MinecraftServer.getCommandManager().register(TestCmd())
         MenuListener.register()
+        MinecraftServer.getCommandManager().register(ShopCommand())
         logger.info("[ShopExtension] has been enabled!")
     }
 
