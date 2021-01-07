@@ -1,5 +1,6 @@
 package world.cepi.shops
 
+import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.kstom.addSyntax
@@ -7,6 +8,9 @@ import world.cepi.kstom.arguments.asSubcommand
 
 class ShopCommand: Command("shop") {
 
+    companion object {
+        val shops: MutableList<Shop> = mutableListOf()
+    }
 
     init {
         val create = "create".asSubcommand()
@@ -14,15 +18,23 @@ class ShopCommand: Command("shop") {
         val open = "open".asSubcommand()
         val shopName = ArgumentType.Word("id")
 
-        val existingShopName = ArgumentType.DynamicWord("shopid")
+        val existingShopName = ArgumentType.DynamicWord("shopid").fromRestrictions { shops.any { shop -> shop.id == it} }
         val add = "add".asSubcommand()
         val remove = "remove".asSubcommand()
         val delete = "delete".asSubcommand()
 
-        addSyntax(create, shopName) { ->
+        addSyntax(create, shopName) { player, args ->
+
+            val shop = Shop(args.get(shopName))
+
+            shops.add(shop)
 
         }
 
+    }
+
+    override fun onDynamicWrite(sender: CommandSender, text: String): Array<String> {
+        return shops.map { it.id }.toTypedArray()
     }
 
 }

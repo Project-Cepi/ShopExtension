@@ -31,7 +31,7 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:ca3667732f")
+    implementation("com.github.Minestom:Minestom:e4e564ab07")
 
     // Get KStom
     implementation("com.github.Project-Cepi:KStom:aace4fedfe")

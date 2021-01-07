@@ -16,6 +16,10 @@ class Menu(
     type: InventoryType = InventoryType.CHEST_3_ROW
 ) {
 
+    init {
+        menus.add(this)
+    }
+
     /** The internal inventory object of the Menu */
     val inventory = Inventory(type, name)
 
@@ -58,6 +62,10 @@ class Menu(
     fun open(vararg players: Player) {
         players.forEach { it.openMenu(this) }
     }
+
+    companion object {
+        val menus: MutableList<Menu> = mutableListOf()
+    }
 }
 
 /**
@@ -75,4 +83,7 @@ inline fun menu(name: String = "Chest", type: InventoryType = InventoryType.CHES
     return menu
 }
 
+/**
+ * Opens a menu object for a player
+ */
 fun Player.openMenu(menu: Menu) = this.openInventory(menu.inventory)
