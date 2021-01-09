@@ -59,6 +59,16 @@ class Menu(
 
     }
 
+    fun setRow(row: Int, item: ItemStack, onClick: (ClickType) -> Unit = { }): MenuItems {
+        val items = MenuItems()
+        ((row * 9)..(row * 9 + 9)).forEach {
+            this.inventory.setItemStack(it, item)
+            items.add(MenuItem(it, item, this).onClick(consumer = onClick))
+        }
+
+        return items
+    }
+
     fun open(vararg players: Player) {
         players.forEach { it.openMenu(this) }
     }
