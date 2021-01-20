@@ -1,10 +1,11 @@
-package world.cepi.shops
+package world.cepi.shops.commands
 
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
+import world.cepi.shops.ShopObject.Shop
 
 class ShopCommand: Command("shop") {
 
