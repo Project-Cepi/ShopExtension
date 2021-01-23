@@ -31,10 +31,10 @@ dependencies {
     implementation(kotlin("reflect"))
 
     // Compile Minestom into project
-    implementation("com.github.Minestom:Minestom:e4e564ab07")
+    implementation("com.github.Minestom:Minestom:5eb5f32095")
 
     // Get KStom
-    implementation("com.github.Project-Cepi:KStom:aace4fedfe")
+    implementation("com.github.Project-Cepi:KStom:4fc7563d18")
 
     // Get ItemExtension
 //    implementation("com.github.Project-Cepi:ItemExtension:8f515036bd")

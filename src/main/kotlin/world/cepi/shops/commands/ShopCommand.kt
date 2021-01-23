@@ -1,5 +1,6 @@
 package world.cepi.shops.commands
 
+import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
@@ -19,23 +20,37 @@ class ShopCommand: Command("shop") {
         val open = "open".asSubcommand()
         val shopName = ArgumentType.Word("id")
 
-        val existingShopName = ArgumentType.DynamicWord("shopid").fromRestrictions { shops.any { shop -> shop.id == it} }
+        val existingShopName = ArgumentType.DynamicWord("shopname").fromRestrictions { shops.any { shop -> shop.name == it} }
         val add = "add".asSubcommand()
         val remove = "remove".asSubcommand()
         val delete = "delete".asSubcommand()
 
         addSyntax(create, shopName) { player, args ->
-
+            for (s in shops) {
+                if (args.get(shopName).equals(s.name)) {
+                    player.sendMessage("${ChatColor.RED}A shop with that name already exists!")
+                    return@addSyntax
+                }
+            }
             val shop = Shop(args.get(shopName))
-
             shops.add(shop)
-
+            player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully created!")
         }
-
+        addSyntax(delete, shopName) {player, args ->
+            for (s in shops) {
+                if (args.get(shopName).equals(s.name)) {
+                    shops.remove(s)
+                    player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully deleted!")
+                    return@addSyntax
+                }
+            }
+            player.sendMessage("${ChatColor.RED}A shop with that name does not exist!")
+            return@addSyntax
+        }
     }
 
     override fun onDynamicWrite(sender: CommandSender, text: String): Array<String> {
-        return shops.map { it.id }.toTypedArray()
+        return shops.map { it.name }.toTypedArray()
     }
 
 }

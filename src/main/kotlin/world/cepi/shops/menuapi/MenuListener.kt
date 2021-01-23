@@ -8,7 +8,7 @@ import world.cepi.kstom.addEventCallback
 object MenuListener {
 
     fun register() {
-        MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class) { event ->
+        MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryPreClickEvent::class.java) { event ->
             val item = MenuItem.items.firstOrNull { it.slot == event.slot && it.menu.inventory.isViewer(event.player) }
 
             item?.clicker?.let {
@@ -17,7 +17,7 @@ object MenuListener {
             }
         }
 
-        MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryCloseEvent::class) { event ->
+        MinecraftServer.getGlobalEventHandler().addEventCallback(InventoryCloseEvent::class.java) { event ->
 
         }
     }
