@@ -7,6 +7,7 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
 import world.cepi.shops.ShopObject.Shop
+import world.cepi.shops.ShopObject.ShopItem
 
 class ShopCommand: Command("shop") {
 
@@ -16,9 +17,11 @@ class ShopCommand: Command("shop") {
 
     init {
         val create = "create".asSubcommand()
+        val addItem = "additem".asSubcommand()
         val edit = "edit".asSubcommand()
         val open = "open".asSubcommand()
-        val shopName = ArgumentType.Word("id")
+        val shopName = ArgumentType.Word("shopID")
+        val itemName = ArgumentType.Word("itemID")
 
         val existingShopName = ArgumentType.DynamicWord("shopname").fromRestrictions { shops.any { shop -> shop.name == it} }
         val add = "add".asSubcommand()
@@ -46,6 +49,10 @@ class ShopCommand: Command("shop") {
             }
             player.sendMessage("${ChatColor.RED}A shop with that name does not exist!")
             return@addSyntax
+        }
+        addSyntax(addItem, itemName, shopName) {player, args ->
+            var shop = shops.find { it.name == args.get(shopName) }
+            player.sendMessage(shop.toString())
         }
     }
 
