@@ -4,10 +4,13 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
+import net.minestom.server.item.Material
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
+import world.cepi.shops.ShopObject.ActionType
 import world.cepi.shops.ShopObject.Shop
 import world.cepi.shops.ShopObject.ShopItem
+import world.cepi.shops.menuapi.ItemBuilder
 
 class ShopCommand: Command("shop") {
 
@@ -50,8 +53,15 @@ class ShopCommand: Command("shop") {
             player.sendMessage("${ChatColor.RED}A shop with that name does not exist!")
             return@addSyntax
         }
+        addSyntax(open, shopName) {player, args ->
+            val shop = shops.find {it.name == args.get(shopName) }
+            shop?.render(player.asPlayer())
+        }
         addSyntax(addItem, itemName, shopName) {player, args ->
             var shop = shops.find { it.name == args.get(shopName) }
+            val item = ShopItem(ItemBuilder(Material.IRON_AXE).asItem(), 0, ActionType.BUY)
+            if (shop == null) player.sendMessage("${ChatColor.RED}That shop does not exist!")
+            shop?.items?.add(item)
             player.sendMessage(shop.toString())
         }
     }
