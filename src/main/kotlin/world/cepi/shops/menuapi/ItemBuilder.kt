@@ -8,6 +8,6 @@ class ItemBuilder(val material: Material, val name: String = material.name, val 
     fun asItem(): ItemStack {
         val itemStack = ItemStack(material, amount)
         itemStack.displayName = name.asRich()
-        return ItemStack(material, amount)
+        return itemStack
     }
 }
