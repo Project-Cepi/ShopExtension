@@ -3,7 +3,6 @@ package world.cepi.shops.menuapi
 import net.minestom.server.MinecraftServer
 import net.minestom.server.event.inventory.InventoryCloseEvent
 import net.minestom.server.event.inventory.InventoryPreClickEvent
-import world.cepi.kstom.addEventCallback
 
 object MenuListener {
 
