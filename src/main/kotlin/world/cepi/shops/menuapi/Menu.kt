@@ -40,7 +40,7 @@ class Menu(
     /**
      * Sets an item at a position in the [Menu].
      *
-     * @param slot The slot to set the item at
+     * @param slots The slot to set the item at
      * @param item The item to put in that slot
      * @param onClick Lambda that triggers the user clicks on the MenuItem.
      *
