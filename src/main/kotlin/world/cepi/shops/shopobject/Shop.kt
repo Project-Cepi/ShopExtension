@@ -1,4 +1,4 @@
-package world.cepi.shops.ShopObject
+package world.cepi.shops.shopobject
 
 import net.minestom.server.entity.Player
 import net.minestom.server.inventory.InventoryType
