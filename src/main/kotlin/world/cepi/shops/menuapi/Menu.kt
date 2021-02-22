@@ -5,7 +5,6 @@ import net.minestom.server.inventory.Inventory
 import net.minestom.server.inventory.InventoryType
 import net.minestom.server.inventory.click.ClickType
 import net.minestom.server.item.ItemStack
-import net.minestom.server.item.Material
 
 /** Wrapper class for [Inventory]. Holds [MenuItem]. */
 class Menu(
