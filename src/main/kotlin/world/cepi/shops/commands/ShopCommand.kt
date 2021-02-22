@@ -7,9 +7,9 @@ import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.item.Material
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
-import world.cepi.shops.ShopObject.ActionType
-import world.cepi.shops.ShopObject.Shop
-import world.cepi.shops.ShopObject.ShopItem
+import world.cepi.shops.shopobject.ActionType
+import world.cepi.shops.shopobject.Shop
+import world.cepi.shops.shopobject.ShopItem
 import world.cepi.shops.menuapi.ItemBuilder
 
 class ShopCommand: Command("shop") {
