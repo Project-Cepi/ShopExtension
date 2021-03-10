@@ -4,13 +4,13 @@ import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
+import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import world.cepi.kstom.addSyntax
 import world.cepi.kstom.arguments.asSubcommand
-import world.cepi.shops.shopobject.ActionType
-import world.cepi.shops.shopobject.Shop
-import world.cepi.shops.shopobject.ShopItem
-import world.cepi.shops.menuapi.ItemBuilder
+import world.cepi.shops.shop.ActionType
+import world.cepi.shops.shop.Shop
+import world.cepi.shops.shop.ShopItem
 
 class ShopCommand: Command("shop") {
 
@@ -26,25 +26,24 @@ class ShopCommand: Command("shop") {
         val shopName = ArgumentType.Word("shopID")
         val itemName = ArgumentType.Word("itemID")
 
-        val existingShopName = ArgumentType.DynamicWord("shopname").fromRestrictions { shops.any { shop -> shop.name == it} }
+        val existingShopName = ArgumentType.DynamicWord("shopname").fromRestrictions { shops.any { shop -> shop.name == it } }
         val add = "add".asSubcommand()
         val remove = "remove".asSubcommand()
         val delete = "delete".asSubcommand()
 
         addSyntax(create, shopName) { player, args ->
-            for (s in shops) {
-                if (args.get(shopName).equals(s.name)) {
-                    player.sendMessage("${ChatColor.RED}A shop with that name already exists!")
-                    return@addSyntax
-                }
+            if (shops.any { args.get(shopName) == it.name }) {
+                player.sendMessage("${ChatColor.RED}A shop with that name already exists!")
+                return@addSyntax
             }
+
             val shop = Shop(args.get(shopName))
             shops.add(shop)
             player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully created!")
         }
         addSyntax(delete, shopName) {player, args ->
             for (s in shops) {
-                if (args.get(shopName).equals(s.name)) {
+                if (args.get(shopName) == s.name) {
                     shops.remove(s)
                     player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully deleted!")
                     return@addSyntax
@@ -54,12 +53,13 @@ class ShopCommand: Command("shop") {
             return@addSyntax
         }
         addSyntax(open, shopName) {player, args ->
-            val shop = shops.find {it.name == args.get(shopName) }
+            val shop = shops.find { it.name == args.get(shopName) }
             shop?.render(player.asPlayer())
         }
+
         addSyntax(addItem, itemName, shopName) {player, args ->
-            var shop = shops.find { it.name == args.get(shopName) }
-            val item = ShopItem(ItemBuilder(Material.IRON_AXE).asItem(), 0, ActionType.BUY)
+            val shop = shops.find { it.name == args.get(shopName) }
+            val item = ShopItem(ItemStack(Material.IRON_AXE, 1), 0, ActionType.BUY)
             if (shop == null) player.sendMessage("${ChatColor.RED}That shop does not exist!")
             shop?.items?.add(item)
             player.sendMessage(shop.toString())

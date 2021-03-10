@@ -1,4 +1,4 @@
-package world.cepi.shops.shopobject
+package world.cepi.shops.shop
 
 import net.minestom.server.item.ItemStack
 

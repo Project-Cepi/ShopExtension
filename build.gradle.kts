@@ -36,8 +36,12 @@ dependencies {
     // Get KStom
     implementation("com.github.Project-Cepi:KStom:4fc7563d18")
 
-    // Get ItemExtension
-//    implementation("com.github.Project-Cepi:ItemExtension:8f515036bd")
+    // Use mworlza's canvas
+    implementation("com.github.mworzala:canvas:bb1772580e")
+
+    // Add Kyori Minestom implementation
+    implementation("com.github.mworzala:adventure-platform-minestom:2e12f45b2e")
+    implementation("net.kyori:adventure-text-minimessage:4.0.0-SNAPSHOT")
 
     // OkHttp
     implementation("com.squareup.okhttp3", "okhttp", "4.9.0")
