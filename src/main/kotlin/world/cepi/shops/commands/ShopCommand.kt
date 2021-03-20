@@ -14,52 +14,48 @@ import world.cepi.shops.shop.ShopItem
 
 object ShopCommand: Command("shop") {
 
-    val shops: MutableList<Shop> = mutableListOf()
+    val shops: MutableMap<String, Shop> = mutableMapOf()
 
     init {
         val create = "create".asSubcommand()
         val addItem = "additem".asSubcommand()
-        val edit = "edit".asSubcommand()
         val open = "open".asSubcommand()
-        val shopName = ArgumentType.Word("shopID")
-        val itemName = ArgumentType.Word("itemID")
+        val shopID = ArgumentType.Word("shopID")
 
         val price = ArgumentType.Integer("price")
         price.defaultValue = 0
 
-        val existingShopName = ArgumentType.DynamicWord("shopname").fromRestrictions { shops.any { shop -> shop.name == it } }
         val delete = "delete".asSubcommand()
 
-        addSyntax(create, shopName) { player, args ->
+        addSyntax(create, shopID) { player, args ->
 
-            if (shops.any { args.get(shopName) == it.name }) {
+            if (shops.containsKey(args.get(shopID))) {
                 player.sendFormattedMessage(shopAlreadyExists)
                 return@addSyntax
             }
 
-            val shop = Shop(args.get(shopName))
-            shops.add(shop)
+            val shop = Shop()
+            shops[args.get(shopID)] = shop
             player.sendFormattedMessage(shopCreated)
         }
 
-        addSyntax(delete, shopName) { player, args ->
-            for (s in shops) {
-                if (args.get(shopName) == s.name) {
-                    shops.remove(s)
-                    player.sendFormattedMessage(shopDeleted)
-                    return@addSyntax
-                }
+        addSyntax(delete, shopID) { player, args ->
+
+            if (!shops.containsKey(args.get(shopID))) {
+                player.sendFormattedMessage(shopDoesNotExists)
+                return@addSyntax
             }
 
-            player.sendFormattedMessage(shopDoesNotExists)
+            shops.remove(args.get(shopID))
+            player.sendFormattedMessage(shopDeleted)
             return@addSyntax
         }
 
-        addSyntax(open, shopName) { sender, args ->
+        addSyntax(open, shopID) { sender, args ->
 
             val player = sender as Player
 
-            val shop = shops.find { it.name == args.get(shopName) }
+            val shop = shops[args.get(shopID)]
 
             if (shop == null) {
                 player.sendFormattedMessage(shopDoesNotExists)
@@ -69,11 +65,11 @@ object ShopCommand: Command("shop") {
             shop.render(player)
         }
 
-        addSyntax(addItem, shopName, price) { sender, args ->
+        addSyntax(addItem, shopID, price) { sender, args ->
 
             val player = sender as Player
 
-            val shop = shops.find { it.name == args.get(shopName) }
+            val shop = shops[args.get(shopID)]
 
             if (shop == null) {
                 player.sendFormattedMessage(shopDoesNotExists)
@@ -89,7 +85,7 @@ object ShopCommand: Command("shop") {
     }
 
     override fun onDynamicWrite(sender: CommandSender, text: String): Array<String> {
-        return shops.map { it.name }.toTypedArray()
+        return shops.keys.toTypedArray()
     }
 
 }
