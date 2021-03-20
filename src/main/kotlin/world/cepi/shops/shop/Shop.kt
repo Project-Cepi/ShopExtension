@@ -1,5 +1,6 @@
 package world.cepi.shops.shop
 
+import com.mattworzala.canvas.MutableProps
 import com.mattworzala.canvas.ext.canvas
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
@@ -16,6 +17,8 @@ data class Shop(
     val items: MutableList<ShopItem> = mutableListOf()
 ) {
     fun render(player: Player) {
-        player.canvas.render(ShopUI)
+        val props = MutableProps(player)
+        props["shop"] = this
+        player.canvas.render(ShopUI, props)
     }
 }

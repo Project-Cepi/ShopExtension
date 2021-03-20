@@ -7,7 +7,7 @@ import world.cepi.shops.commands.ShopCommand
 class ShopExtension : Extension() {
 
     override fun initialize() {
-        MinecraftServer.getCommandManager().register(ShopCommand())
+        MinecraftServer.getCommandManager().register(ShopCommand)
         logger.info("[ShopExtension] has been enabled!")
     }
 

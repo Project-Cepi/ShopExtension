@@ -1,5 +1,5 @@
 package world.cepi.shops.shop
 
-import net.minestom.server.item.ItemStack
+import world.cepi.itemextension.item.Item
 
-class ShopItem(val item: ItemStack, val price: Int, val type: ActionType)
+class ShopItem(val item: Item, val price: Int = 0)
