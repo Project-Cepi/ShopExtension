@@ -1,5 +1,6 @@
 package world.cepi.shops.commands
 
+import net.kyori.adventure.text.Component
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
@@ -80,6 +81,8 @@ object ShopCommand: Command("shop") {
                 val item = player.itemInMainHand.data!!.get<Item>(Item.key)!!
 
                 shop.items.add(ShopItem(item, args.get(price)))
+
+                player.sendFormattedMessage(shopItemAdded, Component.text(args.get(shopID)))
             }
         }
     }
