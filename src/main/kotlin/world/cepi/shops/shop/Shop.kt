@@ -8,7 +8,7 @@ import world.cepi.shops.shop.canvas.ShopUI
 
 data class Shop(
     /** The human name of the shop*/
-    val name: String,
+    val name: String = "My Shop",
 
     /** The display icon of the shop. */
     val icon: Material = Material.PAPER,
