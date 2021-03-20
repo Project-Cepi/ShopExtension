@@ -37,7 +37,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:949794cbf5")
+    compileOnly("com.github.Project-Cepi:Minestom:60a03a9c8e")
 
     // Get KStom
     compileOnly("com.github.Project-Cepi:KStom:cbcf67f09c")
@@ -50,6 +50,9 @@ dependencies {
 
     // Canvas
     compileOnly("com.github.mworzala:canvas:407c072b23")
+
+    // Add Kepi
+    compileOnly("com.github.Project-Cepi:Kepi:98950d8431")
 }
 
 tasks.withType<Test> {

@@ -1,12 +1,12 @@
 package world.cepi.shops.commands
 
-import net.minestom.server.chat.ChatColor
 import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.kstom.command.addSyntax
 import world.cepi.shops.shop.Shop
@@ -33,25 +33,25 @@ object ShopCommand: Command("shop") {
         addSyntax(create, shopName) { player, args ->
 
             if (shops.any { args.get(shopName) == it.name }) {
-                player.sendMessage("${ChatColor.RED}A shop with that name already exists!")
+                player.sendFormattedMessage(shopAlreadyExists)
                 return@addSyntax
             }
 
             val shop = Shop(args.get(shopName))
             shops.add(shop)
-            player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully created!")
+            player.sendFormattedMessage(shopCreated)
         }
 
         addSyntax(delete, shopName) { player, args ->
             for (s in shops) {
                 if (args.get(shopName) == s.name) {
                     shops.remove(s)
-                    player.sendMessage("${ChatColor.BRIGHT_GREEN}Shop successfully deleted!")
+                    player.sendFormattedMessage(shopDeleted)
                     return@addSyntax
                 }
             }
 
-            player.sendMessage("${ChatColor.RED}A shop with that name does not exist!")
+            player.sendFormattedMessage(shopDoesNotExists)
             return@addSyntax
         }
 
@@ -62,7 +62,7 @@ object ShopCommand: Command("shop") {
             val shop = shops.find { it.name == args.get(shopName) }
 
             if (shop == null) {
-                player.sendMessage("${ChatColor.RED}A shop with that name does not exist!")
+                player.sendFormattedMessage(shopDoesNotExists)
                 return@addSyntax
             }
 
@@ -76,7 +76,7 @@ object ShopCommand: Command("shop") {
             val shop = shops.find { it.name == args.get(shopName) }
 
             if (shop == null) {
-                player.sendMessage("${ChatColor.RED}That shop does not exist!")
+                player.sendFormattedMessage(shopDoesNotExists)
                 return@addSyntax
             }
 

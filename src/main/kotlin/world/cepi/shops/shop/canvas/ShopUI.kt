@@ -15,7 +15,8 @@ val ShopUI = component(9, 6) {
     }
 
     get(4).item {
-        ItemStack(props.get<Shop>("shop").icon, 1)
+        material = props.get<Shop>("shop").icon
+        displayName
     }
 
     row(1..3) {
