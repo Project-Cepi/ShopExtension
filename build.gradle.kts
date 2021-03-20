@@ -81,8 +81,8 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { kotlinOptions.jvmTarget = "11" }
-val compileKotlin: org.jetbrains.kotlin.gradle.tasks.KotlinCompile by tasks
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+val compileKotlin: KotlinCompile by tasks
 
 compileKotlin.kotlinOptions {
     freeCompilerArgs = listOf("-Xinline-classes")
