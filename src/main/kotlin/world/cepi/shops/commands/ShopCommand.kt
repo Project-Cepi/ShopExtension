@@ -20,8 +20,10 @@ object ShopCommand: Command("shop") {
     init {
         val create = "create".asSubcommand()
         val addItem = "additem".asSubcommand()
+        val removeItem = "removeItem".asSubcommand()
         val open = "open".asSubcommand()
         val shopID = ArgumentType.Word("shopID")
+        val itemIndex = ArgumentType.Integer("itemIndex")
 
         val price = ArgumentType.Integer("price")
         price.defaultValue = 0
@@ -80,10 +82,34 @@ object ShopCommand: Command("shop") {
             if (checkIsItem(player.itemInMainHand)) {
                 val item = player.itemInMainHand.data!!.get<Item>(Item.key)!!
 
-                shop.items.add(ShopItem(item, args.get(price)))
+                shop.items.add(ShopItem(item, args.get(price), shop.counter))
+
+                shop.counter += 1
 
                 player.sendFormattedMessage(shopItemAdded, Component.text(args.get(shopID)))
             }
+        }
+
+        addSyntax(removeItem, shopID, itemIndex) { sender, args ->
+            val player = sender as Player
+            val shop = shops[args.get(shopID)]
+            if (shop == null) {
+                player.sendFormattedMessage(shopDoesNotExists)
+                return@addSyntax
+            }
+            var item = null as ShopItem
+            for (i in shop.items) {
+                if (i.id == args.get(itemIndex)) {
+                    item = i
+                }
+            }
+            if (item == null) {
+                player.sendFormattedMessage("An item with that index could not be found in this shop!")
+                return@addSyntax
+            }
+            shop.items.remove(item)
+            player.sendFormattedMessage("Item successfully removed from shop \"${shop.name}\"")
+            return@addSyntax
         }
     }
 
