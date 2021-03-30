@@ -108,7 +108,7 @@ object ShopCommand: Command("shop") {
             }
 
             shop.items.remove(item)
-            
+
             player.sendFormattedMessage("Item successfully removed from shop \"${shop.name}\"")
             return@addSyntax
         }
