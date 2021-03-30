@@ -91,23 +91,24 @@ object ShopCommand: Command("shop") {
         }
 
         addSyntax(removeItem, shopID, itemIndex) { sender, args ->
+
             val player = sender as Player
             val shop = shops[args.get(shopID)]
+
             if (shop == null) {
                 player.sendFormattedMessage(shopDoesNotExists)
                 return@addSyntax
             }
-            var item = null as ShopItem
+
+            var item = shop[args.get(itemIndex)]
             for (i in shop.items) {
                 if (i.id == args.get(itemIndex)) {
                     item = i
                 }
             }
-            if (item == null) {
-                player.sendFormattedMessage("An item with that index could not be found in this shop!")
-                return@addSyntax
-            }
+
             shop.items.remove(item)
+            
             player.sendFormattedMessage("Item successfully removed from shop \"${shop.name}\"")
             return@addSyntax
         }
