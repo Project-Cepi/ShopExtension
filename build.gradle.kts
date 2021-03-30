@@ -24,6 +24,7 @@ repositories {
     maven(url = "https://jitpack.io")
     maven(url = "https://jcenter.bintray.com/")
     maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    maven(url = "https://repo.velocitypowered.com/snapshots/")
 }
 
 dependencies {
@@ -37,7 +38,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:60a03a9c8e")
+    compileOnly("com.github.Project-Cepi:Minestom:b29217e076")
 
     // Get KStom
     compileOnly("com.github.Project-Cepi:KStom:cbcf67f09c")
@@ -52,7 +53,7 @@ dependencies {
     compileOnly("com.github.mworzala:canvas:407c072b23")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:98950d8431")
+    compileOnly("com.github.Project-Cepi:Kepi:32e01e199f")
 }
 
 tasks.withType<Test> {
