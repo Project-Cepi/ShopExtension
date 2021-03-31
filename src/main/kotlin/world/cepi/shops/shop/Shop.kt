@@ -22,4 +22,6 @@ data class Shop(
         props["shop"] = this
         player.canvas.render(ShopUI, props)
     }
+
+    operator fun get(index: Int): ShopItem = items[index]
 }

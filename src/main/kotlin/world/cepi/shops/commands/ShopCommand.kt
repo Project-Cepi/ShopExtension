@@ -93,6 +93,7 @@ object ShopCommand: Command("shop") {
         }
 
         addSyntax(removeItem, shopID, itemIndex) { sender, args ->
+
             val player = sender as Player
             val shop = shops[args.get(shopID)]
             val index = args.get(itemIndex)
@@ -106,6 +107,7 @@ object ShopCommand: Command("shop") {
                 return@addSyntax
             }
             shop.items.remove(item)
+
             player.sendFormattedMessage("Item successfully removed from shop \"${shop.name}\"")
             return@addSyntax
         }
