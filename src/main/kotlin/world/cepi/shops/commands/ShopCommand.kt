@@ -28,7 +28,7 @@ object ShopCommand: Command("shop") {
         val itemIndex = ArgumentType.Integer("itemIndex")
 
         val price = ArgumentType.Integer("price")
-        price.defaultValue = Supplier { 0 }
+        price.defaultValue = 0
 
         val delete = "delete".asSubcommand()
 
@@ -96,6 +96,7 @@ object ShopCommand: Command("shop") {
 
             val player = sender as Player
             val shop = shops[args.get(shopID)]
+            val id = args.get(shopID)
             val index = args.get(itemIndex)
             if (shop == null) {
                 player.sendFormattedMessage(shopDoesNotExists)
@@ -108,7 +109,7 @@ object ShopCommand: Command("shop") {
             }
             shop.items.remove(item)
 
-            player.sendFormattedMessage("Item successfully removed from shop \"${shop.name}\"")
+            player.sendFormattedMessage("Item successfully removed from shop \"${id}\"")
             return@addSyntax
         }
     }
