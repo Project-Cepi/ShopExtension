@@ -24,6 +24,7 @@ repositories {
     maven(url = "https://jitpack.io")
     maven(url = "https://jcenter.bintray.com/")
     maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    maven(url = "https://repo.velocitypowered.com/snapshots/")
 }
 
 dependencies {
@@ -37,13 +38,13 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:60a03a9c8e")
+    compileOnly("com.github.Project-Cepi:Minestom:45d3b7158c")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:cbcf67f09c")
+    compileOnly("com.github.Project-Cepi:KStom:1b5c0d3d17")
 
     // Items
-    compileOnly("com.github.Project-Cepi:ItemExtension:0c931a7440")
+    compileOnly("com.github.Project-Cepi:ItemExtension:2bc97ac40f")
 
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
@@ -52,7 +53,7 @@ dependencies {
     compileOnly("com.github.mworzala:canvas:407c072b23")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:98950d8431")
+    compileOnly("com.github.Project-Cepi:Kepi:32e01e199f")
 }
 
 tasks.withType<Test> {

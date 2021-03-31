@@ -8,10 +8,12 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedMessage
-import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.kstom.command.addSyntax
+import world.cepi.kstom.command.arguments.asSubcommand
 import world.cepi.shops.shop.Shop
 import world.cepi.shops.shop.ShopItem
+import java.util.concurrent.CompletableFuture.*
+import java.util.function.Supplier
 
 object ShopCommand: Command("shop") {
 
@@ -26,7 +28,7 @@ object ShopCommand: Command("shop") {
         val itemIndex = ArgumentType.Integer("itemIndex")
 
         val price = ArgumentType.Integer("price")
-        price.defaultValue = 0
+        price.defaultValue = Supplier { 0 }
 
         val delete = "delete".asSubcommand()
 
@@ -93,16 +95,12 @@ object ShopCommand: Command("shop") {
         addSyntax(removeItem, shopID, itemIndex) { sender, args ->
             val player = sender as Player
             val shop = shops[args.get(shopID)]
+            val index = args.get(itemIndex)
             if (shop == null) {
                 player.sendFormattedMessage(shopDoesNotExists)
                 return@addSyntax
             }
-            var item = null as ShopItem
-            for (i in shop.items) {
-                if (i.id == args.get(itemIndex)) {
-                    item = i
-                }
-            }
+            var item = shop.items.firstOrNull {it.id == shop.items[index - 1].id}
             if (item == null) {
                 player.sendFormattedMessage("An item with that index could not be found in this shop!")
                 return@addSyntax
