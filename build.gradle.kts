@@ -40,10 +40,10 @@ dependencies {
     compileOnly("com.github.Project-Cepi:Minestom:b29217e076")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:1b5c0d3d17")
+    compileOnly("com.github.Project-Cepi:KStom:44b08cf20c")
 
     // Items
-    compileOnly("com.github.Project-Cepi:ItemExtension:2bc97ac40f")
+    compileOnly("com.github.Project-Cepi:ItemExtension:17eaaedb83")
 
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
