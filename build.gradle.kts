@@ -46,7 +46,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:ItemExtension:17eaaedb83")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // Canvas
     compileOnly("com.github.mworzala:canvas:407c072b23")
