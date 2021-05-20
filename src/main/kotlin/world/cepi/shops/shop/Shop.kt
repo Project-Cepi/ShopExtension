@@ -17,13 +17,10 @@ data class Shop(
     val items: MutableList<ShopItem> = mutableListOf()
 ) {
     var counter = 0
-    fun render(player: Player) {
-        val props = data {
-            this["shop"] = this
-        }
+    fun render(player: Player) = player.canvas.render(ShopUI, data {
+        this["shop"] = this@Shop
+    })
 
-        player.canvas.render(ShopUI, props)
-    }
 
     operator fun get(index: Int): ShopItem = items[index]
 }
