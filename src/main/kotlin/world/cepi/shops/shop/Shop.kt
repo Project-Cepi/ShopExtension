@@ -16,7 +16,6 @@ data class Shop(
     /** All the items in a shop in a list. */
     val items: MutableList<ShopItem> = mutableListOf()
 ) {
-    var counter = 0
     fun render(player: Player) = player.canvas.render(ShopUI, data {
         this["shop"] = this@Shop
     })

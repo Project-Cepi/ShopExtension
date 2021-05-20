@@ -10,7 +10,6 @@ import net.minestom.server.command.builder.exception.ArgumentSyntaxException
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.kepi.messages.sendFormattedMessage
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
@@ -20,7 +19,7 @@ import world.cepi.shops.shop.ShopItem
 import java.util.concurrent.CompletableFuture.*
 import java.util.function.Supplier
 
-object ShopCommand: Command("shop") {
+internal object ShopCommand: Command("shop") {
 
     val shops: MutableMap<String, Shop> = mutableMapOf()
 
@@ -98,9 +97,7 @@ object ShopCommand: Command("shop") {
             if (checkIsItem(player.itemInMainHand)) {
                 val item = player.itemInMainHand.meta.get<Item>(Item.key)!!
 
-                shop.items.add(ShopItem(item, args.get(price), shop.counter))
-
-                shop.counter += 1
+                shop.items.add(ShopItem(item, args.get(price)))
 
                 player.sendFormattedTranslatableMessage(
                     "shop",
@@ -116,11 +113,12 @@ object ShopCommand: Command("shop") {
             val shop = args.get(shopID)
             val index = args.get(itemIndex)
 
-            val item = shop.items.firstOrNull {it.id == shop.items[index - 1].id }
-            if (item == null) {
+            if (shop.items.size < index) {
                 player.sendFormattedTranslatableMessage("shop", "item.notfound")
                 return@addSyntax
             }
+
+            val item = shop.items[index]
             shop.items.remove(item)
 
             player.sendFormattedTranslatableMessage(
