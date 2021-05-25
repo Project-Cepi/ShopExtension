@@ -13,10 +13,9 @@ plugins {
 }
 
 repositories {
-    // Use jcenter for resolving dependencies.
-    jcenter()
-    mavenCentral()
     // Use mavenCentral
+    mavenCentral()
+
     maven(url = "https://repo1.maven.org/maven2/")
     maven(url = "https://repo.spongepowered.org/maven")
     maven(url = "https://libraries.minecraft.net")
@@ -37,10 +36,10 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:5ddda986a7")
+    compileOnly("com.github.Project-Cepi:Minestom:d871cb2c9c")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:ea3624d804")
+    compileOnly("com.github.Project-Cepi:KStom:850bc149d8")
 
     // Items
     compileOnly("com.github.Project-Cepi:ItemExtension:299f42d491")

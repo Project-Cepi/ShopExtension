@@ -12,7 +12,7 @@ import world.cepi.kstom.item.withMeta
 import world.cepi.shops.shop.Shop
 import java.lang.StrictMath.floor
 
-internal const val shopWidth = 7 + 1
+internal const val shopWidth = 7
 
 internal val ShopUI = fragment(9, 6) {
 
@@ -43,9 +43,9 @@ internal val ShopUI = fragment(9, 6) {
 
     shop.items.forEachIndexed { index, shopItem ->
         val displayIndexRow = index % shopWidth
-        val displayIndexCol = floor(index.toDouble() / shopWidth).toInt()
+        val displayIndexCol = floor(index.toDouble().coerceAtLeast(1.0) / (shopWidth)).toInt()
 
-        this.slot(displayIndexRow, displayIndexCol + 1) {
+        this.slot(displayIndexRow + 1, displayIndexCol + 1) {
             item = shopItem.item.renderItem(1)
         }
 
