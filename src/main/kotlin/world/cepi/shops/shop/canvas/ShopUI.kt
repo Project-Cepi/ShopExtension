@@ -8,6 +8,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
+import world.cepi.kstom.item.lore
 import world.cepi.kstom.item.withMeta
 import world.cepi.shops.shop.Shop
 import java.lang.StrictMath.floor
@@ -43,10 +44,15 @@ internal val ShopUI = fragment(9, 6) {
 
     shop.items.forEachIndexed { index, shopItem ->
         val displayIndexRow = index % shopWidth
-        val displayIndexCol = floor(index.toDouble().coerceAtLeast(1.0) / (shopWidth)).toInt()
+        val displayIndexCol = floor(index.toDouble() / (shopWidth)).toInt()
 
         this.slot(displayIndexRow + 1, displayIndexCol + 1) {
-            item = shopItem.item.renderItem(1)
+            item = shopItem.item.renderItem(1).let {
+                it.withLore(it.lore + listOf(
+                    Component.space(),
+
+                ))
+            }
         }
 
     }
