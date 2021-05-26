@@ -11,7 +11,11 @@ import net.minestom.server.entity.Player
 import net.minestom.server.item.ItemStack
 import net.minestom.server.item.Material
 import net.minestom.server.sound.SoundEvent
+import net.minestom.server.tag.Tag
 import world.cepi.economy.EconomyHandler
+import world.cepi.itemextension.item.Item
+import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kstom.item.get
 import world.cepi.kstom.item.lore
 import world.cepi.kstom.item.withMeta
 import world.cepi.kstom.util.component1
@@ -47,6 +51,47 @@ internal val ShopUI = fragment(9, 6) {
                 Component.text("Sell", NamedTextColor.GREEN)
                     .decoration(TextDecoration.ITALIC, false)
             )
+        }
+
+        onClick { event ->
+            val heldItem = event.cursorItem
+
+            // We need to make sure they're actually holding an item
+            if (heldItem == ItemStack.AIR) return@onClick
+
+            val (x, y, z) = player.position
+
+            val cantSellHandler = fun() {
+                player.playSound(Sound.sound(
+                    SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                    Sound.Source.MASTER,
+                    1f,
+                    .5f
+                ), x, y, z)
+            }
+
+            // Looking specifically only for cepi items
+            if (!checkIsItem(heldItem)) run {
+                cantSellHandler()
+                return@onClick
+            }
+
+            val priceAmount = heldItem.meta.getTag(Tag.Integer("string")) ?: return@onClick
+
+            if (priceAmount == 0) {
+                cantSellHandler()
+                return@onClick
+            }
+
+            EconomyHandler[player] += priceAmount * heldItem.amount.toLong()
+
+
+            player.playSound(Sound.sound(
+                SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                Sound.Source.MASTER,
+                1f,
+                2f
+            ), x, y, z)
         }
     }
 
