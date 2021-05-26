@@ -54,12 +54,9 @@ internal val ShopUI = fragment(9, 6) {
         }
 
         onClick { event ->
-            val heldItem = event.cursorItem
-
-            // We need to make sure they're actually holding an item
-            if (heldItem == ItemStack.AIR) return@onClick
-
             val (x, y, z) = player.position
+
+            val heldItem = event.cursorItem
 
             val cantSellHandler = fun() {
                 player.playSound(Sound.sound(
@@ -70,13 +67,22 @@ internal val ShopUI = fragment(9, 6) {
                 ), x, y, z)
             }
 
+            // We need to make sure they're actually holding an item
+            if (heldItem == ItemStack.AIR) run {
+                cantSellHandler()
+                return@onClick
+            }
+
             // Looking specifically only for cepi items
             if (!checkIsItem(heldItem)) run {
                 cantSellHandler()
                 return@onClick
             }
 
-            val priceAmount = heldItem.meta.getTag(Tag.Integer("string")) ?: return@onClick
+            val priceAmount = heldItem.meta.getTag(Tag.Integer("price")) ?: run {
+                cantSellHandler()
+                return@onClick
+            }
 
             if (priceAmount == 0) {
                 cantSellHandler()
@@ -85,6 +91,7 @@ internal val ShopUI = fragment(9, 6) {
 
             EconomyHandler[player] += priceAmount * heldItem.amount.toLong()
 
+            event.cursorItem = ItemStack.AIR
 
             player.playSound(Sound.sound(
                 SoundEvent.BLOCK_NOTE_BLOCK_PLING,
