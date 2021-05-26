@@ -18,6 +18,7 @@ data class Shop(
 ) {
     fun render(player: Player) = player.canvas.render(ShopUI, data {
         this["shop"] = this@Shop
+        this["player"] = player
     })
 
 
