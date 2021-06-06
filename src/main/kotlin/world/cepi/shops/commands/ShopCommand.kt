@@ -11,6 +11,7 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
+import world.cepi.kepi.subcommands.Help
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.item.get
@@ -21,12 +22,16 @@ import java.util.function.Supplier
 
 internal object ShopCommand: Command("shop") {
 
-    val shops: MutableMap<String, Shop> = mutableMapOf()
+    private val shops: MutableMap<String, Shop> = mutableMapOf()
 
     init {
         val create = "create".literal()
-        val addItem = "additem".literal()
-        val removeItem = "removeItem".literal()
+
+        val item = "item".literal()
+
+        val addItem = "add".literal()
+        val removeItem = "remove".literal()
+
         val open = "open".literal()
 
         val newShopID = ArgumentType.Word("newShopID").map { input ->
@@ -52,9 +57,9 @@ internal object ShopCommand: Command("shop") {
             }
         }
 
-        val itemIndex = ArgumentType.Integer("itemIndex")
+        val itemIndex = ArgumentType.Integer("itemIndex").min(0)
 
-        val price = ArgumentType.Integer("price")
+        val price = ArgumentType.Integer("price").min(0)
         price.defaultValue = Supplier { 0 }
 
         val delete = "delete".literal()
@@ -88,16 +93,16 @@ internal object ShopCommand: Command("shop") {
             shop.render(player)
         }
 
-        addSyntax(addItem, shopID, price) { sender, args ->
+        addSyntax(item, addItem, shopID, price) { sender, args ->
 
             val player = sender as Player
 
             val shop = args.get(shopID)
 
             if (checkIsItem(player.itemInMainHand)) {
-                val item = player.itemInMainHand.meta.get<Item>(Item.key)!!
+                val shopItem = player.itemInMainHand.meta.get<Item>(Item.key)!!
 
-                shop.items.add(ShopItem(item, args.get(price)))
+                shop.items.add(ShopItem(shopItem, args.get(price)))
 
                 player.sendFormattedTranslatableMessage(
                     "shop",
@@ -107,7 +112,7 @@ internal object ShopCommand: Command("shop") {
             }
         }
 
-        addSyntax(removeItem, shopID, itemIndex) { sender, args ->
+        addSyntax(item, removeItem, shopID, itemIndex) { sender, args ->
 
             val player = sender as Player
             val shop = args.get(shopID)
@@ -118,8 +123,8 @@ internal object ShopCommand: Command("shop") {
                 return@addSyntax
             }
 
-            val item = shop.items[index]
-            shop.items.remove(item)
+            val shopItem = shop.items[index]
+            shop.items.remove(shopItem)
 
             player.sendFormattedTranslatableMessage(
                 "shop", "item.remove",
@@ -127,10 +132,27 @@ internal object ShopCommand: Command("shop") {
             )
             return@addSyntax
         }
-    }
 
-    override fun onDynamicWrite(sender: CommandSender, text: String): Array<String> {
-        return shops.keys.toTypedArray()
+        addSubcommand(Help(
+            Component.text("The shop command allows you to"),
+            Component.text("create and manage shops."),
+            Component.space(),
+            Component.text("You can:"),
+            Component.text("create, delete, open,", NamedTextColor.BLUE),
+            Component.text("item add, and item remove", NamedTextColor.BLUE),
+            Component.space(),
+            Component.text("Create, delete, and open all take the ")
+                .append(Component.text("shop name", NamedTextColor.YELLOW))
+                .append(Component.text(" parameter.")),
+            Component.space(),
+            Component.text("The two special commands are as follows: "),
+            Component.space(),
+            Component.text("item add <shop name> <price>", NamedTextColor.YELLOW),
+            Component.text("Which takes the item in your hand as the item."),
+            Component.space(),
+            Component.text("item remove <shop name> <item index>", NamedTextColor.YELLOW),
+            Component.text("With the first item starting at 0")
+        ))
     }
 
 }
