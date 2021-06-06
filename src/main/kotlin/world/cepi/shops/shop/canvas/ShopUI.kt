@@ -32,7 +32,7 @@ internal val ShopUI = fragment(9, 6) {
     val player = this.data.get<Player>("player")!!
 
     row(0) {
-        item = ItemStack.of(Material.GRAY_STAINED_GLASS_PANE)
+        item = ItemStack.of(Material.GRAY_STAINED_GLASS_PANE).withDisplayName(Component.space())
     }
 
     this[4].item(shop.icon) {
@@ -42,7 +42,7 @@ internal val ShopUI = fragment(9, 6) {
     }
 
     row(5) {
-        item = ItemStack.of(Material.WHITE_STAINED_GLASS_PANE)
+        item = ItemStack.of(Material.WHITE_STAINED_GLASS_PANE).withDisplayName(Component.space())
     }
 
     this.slot(4, 5) {
@@ -143,6 +143,7 @@ internal val ShopUI = fragment(9, 6) {
     col(0, 8) {
         item = ItemStack.builder(Material.GRAY_STAINED_GLASS_PANE).withMeta {
             customModelData(1)
+            displayName(Component.space())
         }.build()
     }
 
