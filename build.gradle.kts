@@ -54,7 +54,7 @@ dependencies {
     implementation("com.github.mworzala:canvas:73b73e18c9")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:12349e0470")
+    compileOnly("com.github.Project-Cepi:Kepi:3371e1a411")
 }
 
 tasks.withType<Test> {

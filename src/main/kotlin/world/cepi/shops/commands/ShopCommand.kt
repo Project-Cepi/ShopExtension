@@ -12,6 +12,7 @@ import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.subcommands.Help
+import world.cepi.kepi.subcommands.applyHelp
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.item.get
@@ -133,7 +134,7 @@ internal object ShopCommand: Command("shop") {
             return@addSyntax
         }
 
-        addSubcommand(Help(
+        applyHelp(
             """
                 The shop command allows you to
                 create and manage shops.
@@ -153,7 +154,7 @@ internal object ShopCommand: Command("shop") {
                 <yellow>item remove (shop name) (item index)
                 With the first item starting at 0.
             """.trimIndent()
-        ))
+        )
     }
 
 }

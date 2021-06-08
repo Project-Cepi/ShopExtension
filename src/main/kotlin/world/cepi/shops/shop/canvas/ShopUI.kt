@@ -68,13 +68,13 @@ internal val ShopUI = fragment(9, 6) {
             }
 
             // We need to make sure they're actually holding an item
-            if (heldItem == ItemStack.AIR) run {
+            if (heldItem == ItemStack.AIR) {
                 cantSellHandler()
                 return@onClick
             }
 
             // Looking specifically only for cepi items
-            if (!checkIsItem(heldItem)) run {
+            if (!checkIsItem(heldItem)) {
                 cantSellHandler()
                 return@onClick
             }
