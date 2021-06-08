@@ -143,7 +143,7 @@ internal object ShopCommand: Command("shop") {
                 <blue>item add, <gray>and <blue>item remove
                 
                 Create, delete, and open all take the
-                <yellow>shop name <gray>paramater.
+                <yellow>shop name <gray>parameter.
                 
                 The two special commands are as follows:
                 
