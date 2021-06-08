@@ -134,24 +134,25 @@ internal object ShopCommand: Command("shop") {
         }
 
         addSubcommand(Help(
-            Component.text("The shop command allows you to"),
-            Component.text("create and manage shops."),
-            Component.space(),
-            Component.text("You can:"),
-            Component.text("create, delete, open,", NamedTextColor.BLUE),
-            Component.text("item add, and item remove", NamedTextColor.BLUE),
-            Component.space(),
-            Component.text("Create, delete, and open all take the ")
-                .append(Component.text("shop name", NamedTextColor.YELLOW))
-                .append(Component.text(" parameter.")),
-            Component.space(),
-            Component.text("The two special commands are as follows: "),
-            Component.space(),
-            Component.text("item add <shop name> <price>", NamedTextColor.YELLOW),
-            Component.text("Which takes the item in your hand as the item."),
-            Component.space(),
-            Component.text("item remove <shop name> <item index>", NamedTextColor.YELLOW),
-            Component.text("With the first item starting at 0")
+            """
+                The shop command allows you to
+                create and manage shops.
+                
+                You can:
+                <blue>create, delete, open
+                <blue>item add, <gray>and <blue>item remove
+                
+                Create, delete, and open all take the
+                <yellow>shop name <gray>paramater.
+                
+                The two special commands are as follows:
+                
+                <yellow>item add (shop name) (price)
+                Which takes the item in your hand as the item.
+                
+                <yellow>item remove (shop name) (item index)
+                With the first item starting at 0.
+            """.trimIndent()
         ))
     }
 
