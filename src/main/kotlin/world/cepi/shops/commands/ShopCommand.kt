@@ -1,6 +1,7 @@
 package world.cepi.shops.commands
 
 import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.event.ClickEvent
 import net.kyori.adventure.text.format.NamedTextColor
 import net.minestom.server.command.builder.ArgumentCallback
 import net.minestom.server.command.builder.Command
@@ -11,6 +12,7 @@ import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
+import world.cepi.kepi.messages.translations.formatTranslableMessage
 import world.cepi.kepi.subcommands.applyHelp
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
@@ -141,9 +143,20 @@ internal object ShopCommand: Command("shop") {
                 .foldIndexed(Component.empty()) { index, acc, name ->
                     acc.append(
                         Component.text("- ", NamedTextColor.GRAY)
-                            .append(Component.text(name, NamedTextColor.BLUE))
+                            .append(
+                                Component.text(name, NamedTextColor.BLUE)
+                                    .hoverEvent(
+                                        sender.formatTranslableMessage("common", "click.to_open")
+                                            .color(NamedTextColor.GRAY)
+                                    )
+                                    .clickEvent(
+                                        ClickEvent.runCommand(
+                                            "/shop open $name"
+                                        )
+                                    )
+                            )
                     ).let {
-                        if (index != ShopManager.size - 1)
+                        if (index != (ShopManager.size - 1))
                             it.append(Component.newline())
                         else
                             it
