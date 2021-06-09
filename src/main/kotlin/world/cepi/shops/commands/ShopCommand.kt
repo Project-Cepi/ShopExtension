@@ -26,6 +26,7 @@ internal object ShopCommand: Command("shop") {
 
     init {
         val create = "create".literal()
+        val list = "list".literal()
 
         val item = "item".literal()
 
@@ -133,6 +134,21 @@ internal object ShopCommand: Command("shop") {
                 Component.text(shop.name, NamedTextColor.BLUE)
             )
             return@addSyntax
+        }
+
+        addSyntax(list) { sender ->
+            sender.sendMessage(ShopManager.keys()
+                .foldIndexed(Component.empty()) { index, acc, name ->
+                    acc.append(
+                        Component.text("- ", NamedTextColor.GRAY)
+                            .append(Component.text(name, NamedTextColor.BLUE))
+                    ).let {
+                        if (index != ShopManager.size - 1)
+                            it.append(Component.newline())
+                        else
+                            it
+                    }
+                })
         }
 
         applyHelp(

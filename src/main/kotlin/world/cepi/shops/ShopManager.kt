@@ -16,6 +16,8 @@ object ShopManager {
 
     fun has(key: String) = shops.containsKey(key)
 
+    val size = shops.size
+
     fun remove(key: String) {
         shops.remove(key)
     }
