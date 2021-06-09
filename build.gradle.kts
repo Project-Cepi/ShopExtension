@@ -36,7 +36,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:Minestom:73abe7a4d7")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:850bc149d8")
+    compileOnly("com.github.Project-Cepi:KStom:75fbdfb108")
 
     // Items
     compileOnly("com.github.Project-Cepi:ItemExtension:299f42d491")
@@ -48,7 +48,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // Canvas
-    implementation("com.github.mworzala:canvas:73b73e18c9")
+    implementation("com.mattworzala:canvas:1.1.2")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:2045d0a53d")
@@ -69,7 +69,6 @@ tasks {
         archiveBaseName.set("shop")
         mergeServiceFiles()
         minimize()
-
     }
 
     test { useJUnitPlatform() }

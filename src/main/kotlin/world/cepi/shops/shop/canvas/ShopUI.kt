@@ -23,10 +23,7 @@ import java.lang.StrictMath.floor
 
 internal const val shopWidth = 7
 
-internal val ShopUI = fragment(9, 6) {
-
-    val shop = this.data.get<Shop>("shop")!!
-    val player = this.data.get<Player>("player")!!
+fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
 
     row(0) {
         item = ItemStack.of(Material.GRAY_STAINED_GLASS_PANE).withDisplayName(Component.space())

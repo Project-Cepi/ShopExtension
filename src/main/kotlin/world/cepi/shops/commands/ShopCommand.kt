@@ -2,28 +2,27 @@ package world.cepi.shops.commands
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import net.minestom.server.command.CommandSender
 import net.minestom.server.command.builder.ArgumentCallback
 import net.minestom.server.command.builder.Command
 import net.minestom.server.command.builder.arguments.ArgumentType
 import net.minestom.server.command.builder.exception.ArgumentSyntaxException
+import net.minestom.server.command.builder.suggestion.SuggestionEntry
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
-import world.cepi.kepi.subcommands.Help
 import world.cepi.kepi.subcommands.applyHelp
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
+import world.cepi.kstom.command.arguments.suggest
 import world.cepi.kstom.item.get
+import world.cepi.shops.ShopManager
 import world.cepi.shops.shop.Shop
 import world.cepi.shops.shop.ShopItem
 import java.util.concurrent.CompletableFuture.*
 import java.util.function.Supplier
 
 internal object ShopCommand: Command("shop") {
-
-    private val shops: MutableMap<String, Shop> = mutableMapOf()
 
     init {
         val create = "create".literal()
@@ -36,7 +35,7 @@ internal object ShopCommand: Command("shop") {
         val open = "open".literal()
 
         val newShopID = ArgumentType.Word("newShopID").map { input ->
-            if (shops.containsKey(input)) throw ArgumentSyntaxException("Shop already exists", input, 1)
+            if (ShopManager.has(input)) throw ArgumentSyntaxException("Shop already exists", input, 1)
             input
         }.apply {
             callback = ArgumentCallback { sender, exception ->
@@ -48,7 +47,7 @@ internal object ShopCommand: Command("shop") {
         }
 
         val shopID = ArgumentType.Word("shopID").map { input ->
-            shops[input] ?: throw ArgumentSyntaxException("Shop does not exists", input, 1)
+            ShopManager[input] ?: throw ArgumentSyntaxException("Shop does not exists", input, 1)
         }.apply {
             callback = ArgumentCallback { sender, exception ->
                 sender.sendFormattedTranslatableMessage(
@@ -56,6 +55,8 @@ internal object ShopCommand: Command("shop") {
                     Component.text(exception.input, NamedTextColor.BLUE)
                 )
             }
+        }.suggest { _, _ ->
+            ShopManager.keys().map { SuggestionEntry(it) }.toMutableList()
         }
 
         val itemIndex = ArgumentType.Integer("itemIndex").min(0)
@@ -68,7 +69,7 @@ internal object ShopCommand: Command("shop") {
         addSyntax(create, newShopID) { player, args ->
 
             val shop = Shop()
-            shops[args.get(newShopID)] = shop
+            ShopManager[args.get(newShopID)] = shop
             player.sendFormattedTranslatableMessage(
                 "shop", "create",
                 Component.text(args.get(newShopID), NamedTextColor.BLUE)
@@ -77,7 +78,7 @@ internal object ShopCommand: Command("shop") {
 
         addSyntax(delete, shopID) { player, args ->
 
-            shops.remove(args.get(shopID).name)
+            ShopManager.remove(args.get(shopID).name)
             player.sendFormattedTranslatableMessage(
                 "shop",
                 "delete",

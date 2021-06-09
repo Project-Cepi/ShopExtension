@@ -3,7 +3,6 @@ package world.cepi.shops.shop
 import com.mattworzala.canvas.ext.canvas
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
-import world.cepi.kstom.data.data
 import world.cepi.shops.shop.canvas.ShopUI
 
 data class Shop(
@@ -16,11 +15,9 @@ data class Shop(
     /** All the items in a shop in a list. */
     val items: MutableList<ShopItem> = mutableListOf()
 ) {
-    fun render(player: Player) = player.canvas.render(ShopUI, data {
-        this["shop"] = this@Shop
-        this["player"] = player
-    })
-
+    fun render(player: Player) = player.canvas.render {
+        ShopUI(this, player)
+    }
 
     operator fun get(index: Int): ShopItem = items[index]
 }

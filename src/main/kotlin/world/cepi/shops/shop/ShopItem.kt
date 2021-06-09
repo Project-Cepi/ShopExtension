@@ -12,7 +12,7 @@ data class ShopItem(val item: Item, val price: Int = 0) {
         it.withLore(it.lore + listOf(
             Component.space(),
             Component.text("Buy For: ", NamedTextColor.GRAY).decoration(TextDecoration.ITALIC, false),
-            Component.text("$price idk", NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false)
+            Component.text("$price shards", NamedTextColor.GOLD).decoration(TextDecoration.ITALIC, false)
         ))
     }
 
