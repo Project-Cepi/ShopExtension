@@ -14,6 +14,7 @@ import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 import world.cepi.economy.EconomyHandler
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kstom.adventure.asMini
 import world.cepi.kstom.item.withMeta
 import world.cepi.kstom.util.component1
 import world.cepi.kstom.util.component2
@@ -24,6 +25,8 @@ import java.lang.StrictMath.floor
 internal const val shopWidth = 7
 
 fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
+
+    inventory.handle.title = shop.name.asMini()
 
     row(0) {
         item = ItemStack.of(Material.GRAY_STAINED_GLASS_PANE).withDisplayName(Component.space())
