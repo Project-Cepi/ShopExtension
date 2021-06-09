@@ -13,10 +13,7 @@ import net.minestom.server.item.Material
 import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 import world.cepi.economy.EconomyHandler
-import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
-import world.cepi.kstom.item.get
-import world.cepi.kstom.item.lore
 import world.cepi.kstom.item.withMeta
 import world.cepi.kstom.util.component1
 import world.cepi.kstom.util.component2
@@ -60,7 +57,7 @@ internal val ShopUI = fragment(9, 6) {
 
             val cantSellHandler = fun() {
                 player.playSound(Sound.sound(
-                    SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                    SoundEvent.NOTE_BLOCK_PLING,
                     Sound.Source.MASTER,
                     1f,
                     .5f
@@ -94,7 +91,7 @@ internal val ShopUI = fragment(9, 6) {
             event.cursorItem = ItemStack.AIR
 
             player.playSound(Sound.sound(
-                SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                SoundEvent.NOTE_BLOCK_PLING,
                 Sound.Source.MASTER,
                 1f,
                 2f
@@ -117,7 +114,7 @@ internal val ShopUI = fragment(9, 6) {
 
                 if (EconomyHandler[player] < price) {
                     player.playSound(Sound.sound(
-                        SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                        SoundEvent.NOTE_BLOCK_PLING,
                         Sound.Source.MASTER,
                         1f,
                         .5f
@@ -126,7 +123,7 @@ internal val ShopUI = fragment(9, 6) {
                 }
 
                 player.playSound(Sound.sound(
-                    SoundEvent.BLOCK_NOTE_BLOCK_PLING,
+                    SoundEvent.NOTE_BLOCK_PLING,
                     Sound.Source.MASTER,
                     1f,
                     2f
