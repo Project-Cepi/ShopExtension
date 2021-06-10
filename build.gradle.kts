@@ -51,7 +51,7 @@ dependencies {
     implementation("com.mattworzala:canvas:1.1.3")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:2045d0a53d")
+    compileOnly("com.github.Project-Cepi:Kepi:9ed8b195ea")
 }
 
 tasks.withType<Test> {

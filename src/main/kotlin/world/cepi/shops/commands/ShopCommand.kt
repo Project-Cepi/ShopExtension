@@ -11,9 +11,9 @@ import net.minestom.server.command.builder.suggestion.SuggestionEntry
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
-import world.cepi.kepi.subcommands.applyHelp
 import world.cepi.kstom.command.addSyntax
 import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.arguments.suggest
@@ -164,7 +164,7 @@ internal object ShopCommand: Command("shop") {
                 })
         }
 
-        applyHelp(
+        applyHelp {
             """
                 The shop command allows you to
                 create and manage shops.
@@ -184,7 +184,7 @@ internal object ShopCommand: Command("shop") {
                 <yellow>item remove (shop name) (item index)
                 With the first item starting at 0.
             """.trimIndent()
-        )
+        }
     }
 
 }
