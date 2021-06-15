@@ -39,7 +39,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:KStom:75fbdfb108")
 
     // Items
-    compileOnly("com.github.Project-Cepi:ItemExtension:299f42d491")
+    compileOnly("com.github.Project-Cepi:ItemExtension:ae19f9e432")
 
     // Economy
     compileOnly("com.github.Project-Cepi:EconomyExtension:c4bc1b2484")
