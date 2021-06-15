@@ -1,16 +1,20 @@
 package world.cepi.shops.shop
 
 import com.mattworzala.canvas.ext.canvas
+import net.kyori.adventure.text.Component
 import net.minestom.server.entity.Player
 import net.minestom.server.item.Material
 import world.cepi.shops.shop.canvas.ShopUI
 
 data class Shop(
+    /** The ID of the shop. */
+    val id: String,
+
     /** The human name of the shop*/
-    val name: String = "My Shop",
+    var name: Component = Component.text("My Shop"),
 
     /** The display icon of the shop. */
-    val icon: Material = Material.PAPER,
+    var icon: Material = Material.PAPER,
 
     /** All the items in a shop in a list. */
     val items: MutableList<ShopItem> = mutableListOf()

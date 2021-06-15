@@ -19,12 +19,26 @@ import world.cepi.kstom.command.arguments.literal
 import world.cepi.kstom.command.arguments.suggest
 import world.cepi.kstom.item.get
 import world.cepi.shops.ShopManager
+import world.cepi.shops.commands.subcommands.MetaShopSubcommand
 import world.cepi.shops.shop.Shop
 import world.cepi.shops.shop.ShopItem
 import java.util.concurrent.CompletableFuture.*
 import java.util.function.Supplier
 
 internal object ShopCommand: Command("shop") {
+
+    val shopID = ArgumentType.Word("shopID").map { input ->
+        ShopManager[input] ?: throw ArgumentSyntaxException("Shop does not exists", input, 1)
+    }.apply {
+        callback = ArgumentCallback { sender, exception ->
+            sender.sendFormattedTranslatableMessage(
+                "shop", "exists.not",
+                Component.text(exception.input, NamedTextColor.BLUE)
+            )
+        }
+    }.suggest { _, _ ->
+        ShopManager.keys().map { SuggestionEntry(it) }.toMutableList()
+    }
 
     init {
         val create = "create".literal()
@@ -49,19 +63,6 @@ internal object ShopCommand: Command("shop") {
             }
         }
 
-        val shopID = ArgumentType.Word("shopID").map { input ->
-            ShopManager[input] ?: throw ArgumentSyntaxException("Shop does not exists", input, 1)
-        }.apply {
-            callback = ArgumentCallback { sender, exception ->
-                sender.sendFormattedTranslatableMessage(
-                    "shop", "exists.not",
-                    Component.text(exception.input, NamedTextColor.BLUE)
-                )
-            }
-        }.suggest { _, _ ->
-            ShopManager.keys().map { SuggestionEntry(it) }.toMutableList()
-        }
-
         val itemIndex = ArgumentType.Integer("itemIndex").min(0)
 
         val price = ArgumentType.Integer("price").min(0)
@@ -71,7 +72,7 @@ internal object ShopCommand: Command("shop") {
 
         addSyntax(create, newShopID) { player, args ->
 
-            val shop = Shop()
+            val shop = Shop(args.get(newShopID))
             ShopManager[args.get(newShopID)] = shop
             player.sendFormattedTranslatableMessage(
                 "shop", "create",
@@ -81,11 +82,11 @@ internal object ShopCommand: Command("shop") {
 
         addSyntax(delete, shopID) { player, args ->
 
-            ShopManager.remove(args.get(shopID).name)
+            ShopManager.remove(args.get(shopID).id)
             player.sendFormattedTranslatableMessage(
                 "shop",
                 "delete",
-                Component.text(args.get(shopID).name, NamedTextColor.BLUE)
+                Component.text(args.get(shopID).id, NamedTextColor.BLUE)
             )
         }
 
@@ -112,7 +113,7 @@ internal object ShopCommand: Command("shop") {
                 player.sendFormattedTranslatableMessage(
                     "shop",
                     "item.add",
-                    Component.text(args.get(shopID).name, NamedTextColor.BLUE)
+                    Component.text(args.get(shopID).id, NamedTextColor.BLUE)
                 )
             }
         }
@@ -133,7 +134,7 @@ internal object ShopCommand: Command("shop") {
 
             player.sendFormattedTranslatableMessage(
                 "shop", "item.remove",
-                Component.text(shop.name, NamedTextColor.BLUE)
+                Component.text(shop.id, NamedTextColor.BLUE)
             )
             return@addSyntax
         }
@@ -185,6 +186,8 @@ internal object ShopCommand: Command("shop") {
                 With the first item starting at 0.
             """.trimIndent()
         }
+
+        addSubcommand(MetaShopSubcommand)
     }
 
 }
