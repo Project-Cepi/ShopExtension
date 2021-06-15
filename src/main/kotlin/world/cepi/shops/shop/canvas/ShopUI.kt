@@ -26,15 +26,14 @@ internal const val shopWidth = 7
 
 fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
 
-    inventory.handle.title = shop.name.asMini()
+    inventory.handle.title = shop.name
 
     row(0) {
         item = ItemStack.of(Material.GRAY_STAINED_GLASS_PANE).withDisplayName(Component.space())
     }
 
     this[4].item(shop.icon) {
-        displayName(Component.text(shop.name)
-            .color(NamedTextColor.WHITE)
+        displayName(shop.name
             .decoration(TextDecoration.ITALIC, false))
     }
 
