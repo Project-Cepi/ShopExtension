@@ -18,8 +18,8 @@ repositories {
 
     maven(url = "https://jitpack.io")
     maven(url = "https://repo.spongepowered.org/maven")
-    maven(url = "https://repo.minestom.com/repository/maven-public/")
     maven(url = "https://repo.velocitypowered.com/snapshots/")
+    maven(url = "https://repo.minestom.com/repository/maven-public/")
 }
 
 dependencies {
@@ -33,7 +33,7 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Project-Cepi:Minestom:73abe7a4d7")
+    compileOnly("com.github.Minestom:Minestom:31a7413531")
 
     // Get KStom
     compileOnly("com.github.Project-Cepi:KStom:5a2a3a30bd")
