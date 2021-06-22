@@ -11,6 +11,7 @@ import net.minestom.server.command.builder.suggestion.SuggestionEntry
 import net.minestom.server.entity.Player
 import world.cepi.itemextension.item.Item
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.itemextension.item.itemSerializationModule
 import world.cepi.kepi.command.subcommand.applyHelp
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kepi.messages.translations.formatTranslableMessage
@@ -106,7 +107,7 @@ internal object ShopCommand: Command("shop") {
             val shop = args.get(shopID)
 
             if (checkIsItem(player.itemInMainHand)) {
-                val shopItem = player.itemInMainHand.meta.get<Item>(Item.key)!!
+                val shopItem = player.itemInMainHand.meta.get<Item>(Item.key, itemSerializationModule)!!
 
                 shop.items.add(ShopItem(shopItem, args.get(price)))
 
