@@ -20,10 +20,10 @@ internal object MetaShopSubcommand : Command("meta") {
 
             val literal = displayName.literal()
 
-            addSyntax(ShopCommand.shopID, literal, *clazzArgs.args) { sender, args ->
-                val shop = args[ShopCommand.shopID]
+            addSyntax(ShopCommand.shopID, literal, *clazzArgs.args) {
+                val shop = context[ShopCommand.shopID]
 
-                val instance = clazzArgs.createInstance(args, sender)
+                val instance = clazzArgs.createInstance(context, sender)
 
                 instance.apply(shop)
 

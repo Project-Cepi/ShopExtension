@@ -71,59 +71,59 @@ internal object ShopCommand: Command("shop") {
 
         val delete = "delete".literal()
 
-        addSyntax(create, newShopID) { player, args ->
+        addSyntax(create, newShopID) {
 
-            val shop = Shop(args.get(newShopID))
-            ShopManager[args.get(newShopID)] = shop
-            player.sendFormattedTranslatableMessage(
+            val shop = Shop(context.get(newShopID))
+            ShopManager[context.get(newShopID)] = shop
+            sender.sendFormattedTranslatableMessage(
                 "shop", "create",
-                Component.text(args.get(newShopID), NamedTextColor.BLUE)
+                Component.text(context.get(newShopID), NamedTextColor.BLUE)
             )
         }
 
-        addSyntax(delete, shopID) { player, args ->
+        addSyntax(delete, shopID) {
 
-            ShopManager.remove(args.get(shopID).id)
-            player.sendFormattedTranslatableMessage(
+            ShopManager.remove(context.get(shopID).id)
+            sender.sendFormattedTranslatableMessage(
                 "shop",
                 "delete",
-                Component.text(args.get(shopID).id, NamedTextColor.BLUE)
+                Component.text(context.get(shopID).id, NamedTextColor.BLUE)
             )
         }
 
-        addSyntax(open, shopID) { sender, args ->
+        addSyntax(open, shopID) {
 
             val player = sender as Player
 
-            val shop = args.get(shopID)
+            val shop = context.get(shopID)
 
             shop.render(player)
         }
 
-        addSyntax(item, addItem, shopID, price) { sender, args ->
+        addSyntax(item, addItem, shopID, price) {
 
             val player = sender as Player
 
-            val shop = args.get(shopID)
+            val shop = context.get(shopID)
 
             if (checkIsItem(player.itemInMainHand)) {
                 val shopItem = player.itemInMainHand.meta.get<Item>(Item.key, itemSerializationModule)!!
 
-                shop.items.add(ShopItem(shopItem, args.get(price)))
+                shop.items.add(ShopItem(shopItem, context.get(price)))
 
                 player.sendFormattedTranslatableMessage(
                     "shop",
                     "item.add",
-                    Component.text(args.get(shopID).id, NamedTextColor.BLUE)
+                    Component.text(context.get(shopID).id, NamedTextColor.BLUE)
                 )
             }
         }
 
-        addSyntax(item, removeItem, shopID, itemIndex) { sender, args ->
+        addSyntax(item, removeItem, shopID, itemIndex) {
 
             val player = sender as Player
-            val shop = args.get(shopID)
-            val index = args.get(itemIndex)
+            val shop = context.get(shopID)
+            val index = context.get(itemIndex)
 
             if (shop.items.size < index) {
                 player.sendFormattedTranslatableMessage("shop", "item.notfound")
@@ -140,7 +140,7 @@ internal object ShopCommand: Command("shop") {
             return@addSyntax
         }
 
-        addSyntax(list) { sender ->
+        addSyntax(list) {
             sender.sendMessage(ShopManager.keys()
                 .foldIndexed(Component.empty()) { index, acc, name ->
                     acc.append(

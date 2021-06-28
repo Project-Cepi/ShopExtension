@@ -14,6 +14,7 @@ import net.minestom.server.sound.SoundEvent
 import net.minestom.server.tag.Tag
 import world.cepi.economy.EconomyHandler
 import world.cepi.itemextension.item.checkIsItem
+import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.adventure.asMini
 import world.cepi.kstom.item.withMeta
 import world.cepi.kstom.util.component1
@@ -118,6 +119,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
                         1f,
                         .5f
                     ), x, y, z)
+                    player.sendFormattedTranslatableMessage("shop", "ui.nobuy")
                     return@onClick
                 }
 
