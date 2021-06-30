@@ -36,7 +36,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:0f02be4b2b")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:97f981d448")
+    compileOnly("com.github.Project-Cepi:KStom:0527eabb7f")
 
     // Items
     compileOnly("com.github.Project-Cepi:ItemExtension:848fbaa5d5")
