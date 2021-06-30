@@ -37,8 +37,8 @@ internal object ShopCommand: Command("shop") {
                 Component.text(exception.input, NamedTextColor.BLUE)
             )
         }
-    }.suggest { _, _ ->
-        ShopManager.keys().map { SuggestionEntry(it) }.toMutableList()
+    }.suggest {
+        ShopManager.keys().toList()
     }
 
     init {
