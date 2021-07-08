@@ -45,7 +45,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:EconomyExtension:c4bc1b2484")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     // Canvas
     implementation("com.mattworzala:canvas:1.1.3")
