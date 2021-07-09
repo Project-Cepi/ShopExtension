@@ -48,7 +48,7 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
 
     // Canvas
-    implementation("com.mattworzala:canvas:1.1.3")
+    implementation("com.mattworzala:canvas:1.1.4")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:9ed8b195ea")
