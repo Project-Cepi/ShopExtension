@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "dependencies": [
     "ItemExtension",
-    "Kepi"
-  ]
+    "Kepi",
+    "KStom"
+  ],
+  "meta": {
+    "downloadURL": "https://github.com/Project-Cepi/ShopExtension/releases/download/latest/shop-all.jar"
+  }
 }
