@@ -52,9 +52,8 @@ internal object ShopCommand: Command("shop") {
 
         val open = "open".literal()
 
-        val newShopID = ArgumentType.Word("newShopID").map { input ->
-            if (ShopManager.has(input)) throw ArgumentSyntaxException("Shop already exists", input, 1)
-            input
+        val newShopID = ArgumentType.Word("newShopID").filter { input ->
+            ShopManager.has(input)
         }.apply {
             callback = ArgumentCallback { sender, exception ->
                 sender.sendFormattedTranslatableMessage(

@@ -57,7 +57,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
 
             val cantSellHandler = fun() {
                 player.playSound(Sound.sound(
-                    SoundEvent.NOTE_BLOCK_PLING,
+                    SoundEvent.BLOCK_NOTE_BLOCK_PLING,
                     Sound.Source.MASTER,
                     1f,
                     .5f
@@ -91,7 +91,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
             event.cursorItem = ItemStack.AIR
 
             player.playSound(Sound.sound(
-                SoundEvent.NOTE_BLOCK_PLING,
+                SoundEvent.BLOCK_NOTE_BLOCK_PLING,
                 Sound.Source.MASTER,
                 1f,
                 2f
@@ -114,7 +114,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
 
                 if (EconomyHandler[player] < price) {
                     player.playSound(Sound.sound(
-                        SoundEvent.NOTE_BLOCK_PLING,
+                        SoundEvent.BLOCK_NOTE_BLOCK_PLING,
                         Sound.Source.MASTER,
                         1f,
                         .5f
@@ -124,7 +124,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
                 }
 
                 player.playSound(Sound.sound(
-                    SoundEvent.NOTE_BLOCK_PLING,
+                    SoundEvent.BLOCK_NOTE_BLOCK_PLING,
                     Sound.Source.MASTER,
                     1f,
                     2f
