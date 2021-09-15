@@ -53,7 +53,7 @@ internal object ShopCommand: Command("shop") {
         val open = "open".literal()
 
         val newShopID = ArgumentType.Word("newShopID").filter { input ->
-            ShopManager.has(input)
+            !ShopManager.has(input)
         }.apply {
             callback = ArgumentCallback { sender, exception ->
                 sender.sendFormattedTranslatableMessage(
