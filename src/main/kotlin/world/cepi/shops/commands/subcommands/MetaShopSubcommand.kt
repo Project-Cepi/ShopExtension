@@ -6,31 +6,31 @@ import net.minestom.server.command.builder.Command
 import world.cepi.kepi.messages.sendFormattedTranslatableMessage
 import world.cepi.kstom.command.arguments.generation.generateSyntaxes
 import world.cepi.kstom.command.arguments.literal
+import world.cepi.kstom.command.kommand.Kommand
+import world.cepi.shops.commands.ShopArguments
 import world.cepi.shops.commands.ShopCommand
 import world.cepi.shops.meta.ShopMeta
 
-internal object MetaShopSubcommand : Command("meta") {
+internal object MetaShopSubcommand : Kommand({
 
-    init {
-        ShopMeta::class.sealedSubclasses.forEach {
-            val syntaxes = generateSyntaxes(it)
+    ShopMeta::class.sealedSubclasses.forEach {
+        val syntaxes = generateSyntaxes(it)
 
-            val displayName = it.simpleName!!.dropLast("meta".length).lowercase()
+        val displayName = it.simpleName!!.dropLast("meta".length).lowercase()
 
-            val literal = displayName.literal()
+        val literal = displayName.literal()
 
-            syntaxes.applySyntax(this,ShopCommand.shopID, literal) { instance ->
-                val shop = context[ShopCommand.shopID]
+        syntaxes.applySyntax(this, ShopArguments.shopID, literal) { instance ->
+            val shop = !ShopArguments.shopID
 
-                instance.apply(shop)
+            instance.apply(shop)
 
-                sender.sendFormattedTranslatableMessage(
-                    "shop", "meta.set",
-                    Component.text(displayName, NamedTextColor.BLUE)
-                )
+            sender.sendFormattedTranslatableMessage(
+                "shop", "meta.set",
+                Component.text(displayName, NamedTextColor.BLUE)
+            )
 
-            }
         }
     }
 
-}
+}, "meta")

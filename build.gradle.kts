@@ -36,7 +36,7 @@ dependencies {
     compileOnly("com.github.Minestom:Minestom:fa07d861a6")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:688d2abc0b")
+    compileOnly("com.github.Project-Cepi:KStom:e3ddf8f437")
 
     // Items
     compileOnly("com.github.Project-Cepi:ItemExtension:848fbaa5d5")
@@ -51,7 +51,7 @@ dependencies {
     implementation("com.mattworzala:canvas:1.1.5")
 
     // Add Kepi
-    compileOnly("com.github.Project-Cepi:Kepi:9ed8b195ea")
+    compileOnly("com.github.Project-Cepi:Kepi:23749ad45e")
 }
 
 tasks.withType<Test> {
@@ -78,11 +78,11 @@ tasks {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_16
+    targetCompatibility = JavaVersion.VERSION_16
 }
 
-tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "11" }
+tasks.withType<KotlinCompile> { kotlinOptions.jvmTarget = "16" }
 val compileKotlin: KotlinCompile by tasks
 
 compileKotlin.kotlinOptions {
