@@ -47,6 +47,9 @@ dependencies {
     // import kotlinx serialization
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
+    // Add actions
+    compileOnly("com.github.Project-Cepi:Actions:fcb9bf6ddc")
+
     // Canvas
     implementation("com.mattworzala:canvas:1.1.5")
 
