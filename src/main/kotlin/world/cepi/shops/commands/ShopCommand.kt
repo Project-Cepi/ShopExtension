@@ -31,8 +31,8 @@ internal object ShopCommand: Kommand({
 
     val item by literal
 
-    val addItem by literal
-    val removeItem by literal
+    val addItem = ArgumentType.Literal("add")
+    val removeItem = ArgumentType.Literal("remove")
 
     val open by literal
 
