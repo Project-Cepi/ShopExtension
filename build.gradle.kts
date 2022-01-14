@@ -51,7 +51,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:Actions:fcb9bf6ddc")
 
     // Canvas
-    implementation("com.mattworzala:canvas:1.1.5")
+    implementation("com.github.Project-Cepi:canvas:d3d937c54d")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:23749ad45e")
