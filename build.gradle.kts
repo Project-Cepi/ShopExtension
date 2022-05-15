@@ -45,7 +45,7 @@ dependencies {
     compileOnly("com.github.Project-Cepi:EconomyExtension:c4bc1b2484")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Add actions
     compileOnly("com.github.Project-Cepi:Actions:fcb9bf6ddc")
