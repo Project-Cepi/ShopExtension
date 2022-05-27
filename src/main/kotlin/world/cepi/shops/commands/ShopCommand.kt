@@ -86,7 +86,7 @@ internal object ShopCommand: Kommand({
         val shop = context.get(shopID)
 
         if (checkIsItem(player.itemInMainHand)) {
-            val shopItem = player.itemInMainHand.meta.get<Item>(Item.key, itemSerializationModule)!!
+            val shopItem = player.itemInMainHand.meta().get<Item>(Item.key, itemSerializationModule)!!
 
             shop.items.add(ShopItem(shopItem, context.get(price)))
 

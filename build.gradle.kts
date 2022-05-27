@@ -33,10 +33,10 @@ dependencies {
     compileOnly(kotlin("reflect"))
 
     // Compile Minestom into project
-    compileOnly("com.github.Minestom:Minestom:4ee5cbe424")
+    compileOnly("com.github.Minestom:Minestom:7867313290")
 
     // Get KStom
-    compileOnly("com.github.Project-Cepi:KStom:f962764331")
+    compileOnly("com.github.Project-Cepi:KStom:82f7000079")
 
     // Items
     compileOnly("com.github.Project-Cepi:ItemExtension:848fbaa5d5")
@@ -45,16 +45,19 @@ dependencies {
     compileOnly("com.github.Project-Cepi:EconomyExtension:c4bc1b2484")
 
     // import kotlinx serialization
-    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
 
     // Add actions
     compileOnly("com.github.Project-Cepi:Actions:fcb9bf6ddc")
 
     // Canvas
-    implementation("com.github.Project-Cepi:canvas:d3d937c54d")
+    implementation("com.github.Project-Cepi:canvas:a61710f9e2")
 
     // Add Kepi
     compileOnly("com.github.Project-Cepi:Kepi:23749ad45e")
+
+    // Add MiniMessage
+    implementation("net.kyori:adventure-text-minimessage:4.10.1")
 }
 
 tasks.withType<Test> {

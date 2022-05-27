@@ -76,7 +76,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
                 return@onClick
             }
 
-            val priceAmount = heldItem.meta.getTag(Tag.Integer("price")) ?: run {
+            val priceAmount = heldItem.meta().getTag(Tag.Integer("price")) ?: run {
                 cantSellHandler()
                 return@onClick
             }
@@ -86,7 +86,7 @@ fun ShopUI(shop: Shop, player: Player) = fragment(9, 6) {
                 return@onClick
             }
 
-            EconomyHandler[player] += priceAmount * heldItem.amount.toLong()
+            EconomyHandler[player] += priceAmount * heldItem.amount().toLong()
 
             event.cursorItem = ItemStack.AIR
 
